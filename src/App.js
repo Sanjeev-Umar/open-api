@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import { getUsers } from "./Requests/getUsers";
+import Card from "./Components/Card";
+import UserDetailsCard from "./Components/UserDetailsCard";
+import styled from "styled-components";
+
+const MainComponent = styled.div`
+  background: #333;
+  padding: 20px;
+`;
 
 function App() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const Users = async () => {
+      try {
+        const response = await getUsers();
+
+        setUsers(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    Users();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainComponent>
+      <Card>
+        {users.map((user, i) => (
+          <UserDetailsCard user={user} key={i} />
+        ))}
+      </Card>
+    </MainComponent>
   );
 }
 

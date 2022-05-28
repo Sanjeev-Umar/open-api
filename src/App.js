@@ -19,7 +19,7 @@ function App() {
 
         setUsers(response.data);
       } catch (err) {
-        console.log(err);
+        alert(err);
       }
     };
 

@@ -25,7 +25,7 @@ const UserDetailsCard = (props) => {
   return (
     <Container>
       <ImageContainer>
-        <img src={blankProfile} height="100%" width="100%"></img>
+        <img src={blankProfile} height="100%" width="100%" alt="user"></img>
       </ImageContainer>
       <ContentContainer>
         <h2>{props.user.name}</h2>
